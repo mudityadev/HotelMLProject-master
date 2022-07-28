@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+
+{% block title %}Welcome HotelX {% endblock title %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="row my-2">
+<div class="col-4">
+
+    <div class="card">
+        <div class="card-body">
+            
+            
+              <p><a href="{% url 'index' %}">Return to home</a></p>
+          
+
+        </div>
+      </div>    
+    </div>
+<div class="col-8">
+    <div class="card">
+        <div class="card-body">
+          This is some text within a card body.
+        </div>
+      </div>
+</div>
+</div>
+
+{% endblock content %}

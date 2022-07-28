@@ -1,0 +1,49 @@
+{% extends '../base.html' %}
+
+{% block title %}Upload Dataset | HotelX {% endblock title %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<div class="row my-2">
+    <div class="col-4">
+    
+        <div class="card">
+            <div class="card-body">
+                
+                
+             
+<form action="/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+
+    {% for entry in form %}
+       <div  class="col-sm-2 col-form-label">
+            {{ entry.label_tag  }}
+       </div>
+       <div class="col-sm-2 col-form-label">
+           {{entry}}
+       </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary my-1">
+        Process
+    </button>
+</form>
+    
+            </div>
+          </div>    
+        </div>
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>
+    </div>
+    </div>
+
+
+{% endblock content %}
