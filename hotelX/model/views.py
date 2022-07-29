@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import DatasetForm
 import glob, os
+from .predictionModel import HotelModel
+
+hm = HotelModel()
+
 
 def searchFile():
     os.chdir("C:/Users/Google Prep Oct 22/Music/HotelMLProject-master/HotelMLProject-master/hotelX/media/media")
@@ -10,10 +14,12 @@ def searchFile():
         return str(file)
 
 
-def results():
+def results(request):
     fileName = searchFile()
     # print(fileName)
-    # return render(request, 'layout/results.html')
+    res = hm.decisionTree()
+    print("working res")
+    return render(request, 'layout/results.html')
 
     
 
@@ -22,10 +28,21 @@ def results():
 def uploadFile(request):
     if request.method == 'POST':
         form = DatasetForm(request.POST, request.FILES)
+        whichML = request.POST['dataset']
         
         if form.is_valid():
             form.save()
-            results()
+            # results()
+            # redirect(results)
+            if(whichML == "Decision Tree"):
+                res = hm.decisionTree()
+                res()
+            elif (whichML == "Random Forest"):
+                res = hm.randomForest()
+                res()
+            else:
+                res = hm.linearRegression()
+                res()
             print("2 http")
             return render(request, 'layout/results.html')
             # return HttpResponseRedirect("/") 

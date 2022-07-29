@@ -13,10 +13,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.tree import DecisionTreeRegressor
 
-
-
-
-
 import os 
 import glob
 def searchFile():
@@ -25,6 +21,7 @@ def searchFile():
         # print(file)
         # fileName = str(file)
         return str(file)
+
 f = searchFile()
 fileName = f
 df = pd.read_csv(fileName)
@@ -46,61 +43,105 @@ class HotelModel:
 
     def randomForest(self):
         print("random Forest : ")
-        a = HotelModel()
-        a.cleanDataset()
-        # Split the dataset from X and y
-        X = df.iloc[:, :-1] # X = all feature, except target
-        y = df.iloc[:,-1] # y = only target
-        X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
-        model = RandomForestRegressor()
-        model.fit(X_train, y_train) # fitted the model using training dataset
-        y_pred = model.predict(X_test)
-        acc = 100 - np.sqrt(mean_squared_error(y_test, y_pred))
-        plt.scatter(y_test, y_pred)
-        plt.show()
-        return acc
+        try: 
+            a = HotelModel()
+            a.cleanDataset()
+            # Split the dataset from X and y
+            X = df.iloc[:, :-1] # X = all feature, except target
+            y = df.iloc[:,-1] # y = only target
+            X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
+            model = RandomForestRegressor()
+            model.fit(X_train, y_train) # fitted the model using training dataset
+            y_pred = model.predict(X_test)
+            acc = 100 - np.sqrt(mean_squared_error(y_test, y_pred))
+            plt.scatter(y_test, y_pred)
+            plt.show()
+            return acc
+        except:
+            X = df.iloc[:, :-1] # X = all feature, except target
+            y = df.iloc[:,-1] # y = only target
+            X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
+            model = RandomForestRegressor()
+            model.fit(X_train, y_train) # fitted the model using training dataset
+            y_pred = model.predict(X_test)
+            acc = 100 - np.sqrt(mean_squared_error(y_test, y_pred))
+            plt.scatter(y_test, y_pred)
+            plt.show()
+            return acc  
 
     def linearRegression(self):
         print("linear regression : ")
-        a = HotelModel()
-        a.cleanDataset()
-        # df.drop(["date"], axis=1, inplace=True)
-        # df.drop(["Sno"], axis=1, inplace=True)
-        # Split the dataset from X and y
-        X = df.iloc[:, :-1] # X = all feature, except target
-        y = df.iloc[:,-1] # y = only target
-        X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
-        model = LinearRegression()
-        model.fit(X_train, y_train)
-        #To generate predictions from our model using the predict method
-        predictions = model.predict(X_test)
-        #to do this is plot the two arrays using a scatterplot. 
-        plt.scatter(y_test, predictions)
-        # plt.hist(y_test - predictions)
-        plt.show()
-        sol = metrics.mean_squared_error(y_test, predictions) 
-        accuracy = 100-sol
-        return accuracy
+        try:
+            a = HotelModel()
+            a.cleanDataset()
+            
+            # df.drop(["date"], axis=1, inplace=True)
+            # df.drop(["Sno"], axis=1, inplace=True)
+            # Split the dataset from X and y
+            X = df.iloc[:, :-1] # X = all feature, except target
+            y = df.iloc[:,-1] # y = only target
+            X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
+            model = LinearRegression()
+            model.fit(X_train, y_train)
+            #To generate predictions from our model using the predict method
+            predictions = model.predict(X_test)
+            #to do this is plot the two arrays using a scatterplot. 
+            plt.scatter(y_test, predictions)
+            # plt.hist(y_test - predictions)
+            plt.show()
+            sol = metrics.mean_squared_error(y_test, predictions) 
+            accuracy = 100-sol
+            return accuracy
+        except:
+            X = df.iloc[:, :-1] # X = all feature, except target
+            y = df.iloc[:,-1] # y = only target
+            X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
+            model = LinearRegression()
+            model.fit(X_train, y_train)
+            #To generate predictions from our model using the predict method
+            predictions = model.predict(X_test)
+            #to do this is plot the two arrays using a scatterplot. 
+            plt.scatter(y_test, predictions)
+            # plt.hist(y_test - predictions)
+            plt.show()
+            sol = metrics.mean_squared_error(y_test, predictions) 
+            accuracy = 100-sol
+            return accuracy
+
+
 
     def decisionTree(self):
         print("decision Tree : ")
-        a = HotelModel()
-        a.cleanDataset()
-        # Split the dataset from X and y
-        X = df.iloc[:, :-1] # X = all feature, except target
-        y = df.iloc[:,-1] # y = only target
-        X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
-        regressor = DecisionTreeRegressor()
-        regressor.fit(X_train, y_train)
-        y_pred = regressor.predict(X_test)
-        plt.scatter(y_test, y_pred)
-        plt.show()
-        sol = metrics.mean_squared_error(y_test, y_pred) 
-        accuracy = 100-sol
-        return accuracy
+        try:
+            a = HotelModel()
+            a.cleanDataset()
+            # Split the dataset from X and y
+            X = df.iloc[:, :-1] # X = all feature, except target
+            y = df.iloc[:,-1] # y = only target
+            X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
+            regressor = DecisionTreeRegressor()
+            regressor.fit(X_train, y_train)
+            y_pred = regressor.predict(X_test)
+            plt.scatter(y_test, y_pred)
+            plt.show()
+            sol = metrics.mean_squared_error(y_test, y_pred) 
+            accuracy = 100-sol
+            return accuracy
+        except:
+            X = df.iloc[:, :-1] # X = all feature, except target
+            y = df.iloc[:,-1] # y = only target
+            X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=100)
+            regressor = DecisionTreeRegressor()
+            regressor.fit(X_train, y_train)
+            y_pred = regressor.predict(X_test)
+            plt.scatter(y_test, y_pred)
+            plt.show()
+            sol = metrics.mean_squared_error(y_test, y_pred) 
+            accuracy = 100-sol
+            return accuracy
 
-p = HotelModel()
+# p = HotelModel()
 # acc = p.linearRegression()
 # acc = p.randomForest()
-acc = p.decisionTree()
-print(acc)
+# acc = p.decisionTree()
+# print(acc)
